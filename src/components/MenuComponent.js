@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Dishdetail from './DishdetailComponent'
 
 import {
   Card,
@@ -12,18 +11,6 @@ import {
 
 // list of dishes for a restuarant
 class Menu extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      selectedDish: null
-    };
-  }
-
-  handleItemClick(dish) {
-    this.setState({ selectedDish: dish }, function() {
-    });
-  }
 
   renderDish(dish) {
     if (dish != null)
@@ -40,9 +27,11 @@ class Menu extends Component {
   }
 
   render() {
-    const menu = this.props.dishes.map(dish => (
+    const  props = this.props
+    // call parent component's method in the handler
+    const menu = props.dishes.map(dish => (
       <div key={dish.id} className="col-12 col-md-5 m-1">
-        <Card onClick={() => this.handleItemClick(dish)}>
+        <Card onClick={() => {props.selectedDishHandler(dish.id)}}>
           <CardImg width="100%" src={dish.image} alt={dish.name} />
           <CardImgOverlay>
             <CardTitle>{dish.name}</CardTitle>
@@ -51,14 +40,7 @@ class Menu extends Component {
       </div>
     ));
 
-    return (
-      <div className="container">
-        <div className="row">{menu}</div>
-        <div className="row">
-          <Dishdetail dish={this.state.selectedDish} />
-        </div>
-      </div>
-    );
+    return (<div className="row">{menu}</div>);
   }
 }
 
