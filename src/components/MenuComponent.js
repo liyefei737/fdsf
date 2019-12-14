@@ -40,7 +40,7 @@ class Menu extends Component {
       </div>
     ));
 
-    return (<div className="row">{menu}</div>);
+    return (<div className="container"><div className="row">{menu}</div></div>);
   }
 }
 

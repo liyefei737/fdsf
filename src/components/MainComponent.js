@@ -25,13 +25,12 @@ class Main extends Component {
             <NavbarBrand href="/">Menu</NavbarBrand>
           </div>
         </Navbar>
-        <div className="container">
-          <Menu
-            dishes={this.state.dishes}
-            selectedDishHandler={selectedDishID => {
-              this.onDishSelect(selectedDishID);
-            }}
-          />
+        <Menu
+          dishes={this.state.dishes}
+          selectedDishHandler={selectedDishID => {
+            this.onDishSelect(selectedDishID);
+          }}
+        />
           <div className="row">
             <Dishdetail
               dish={this.state.dishes
@@ -39,7 +38,6 @@ class Main extends Component {
                 .pop()}
             />
           </div>
-        </div>
       </div>
     );
   }
