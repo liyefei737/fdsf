@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import {
   Card,
@@ -9,39 +9,29 @@ import {
   CardTitle
 } from "reactstrap";
 
-// list of dishes for a restuarant
-class Menu extends Component {
 
-  renderDish(dish) {
-    if (dish != null)
-      return (
-        <Card>
-          <CardImg top src={dish.image} alt={dish.name} />
-          <CardBody>
-            <CardTitle>{dish.name}</CardTitle>
-            <CardText>{dish.description}</CardText>
-          </CardBody>
-        </Card>
-      );
-    else return <div></div>;
-  }
+// function component for a Menu Item card
+function MenuItem({ dish, selectedDishHandler}) {
+  return (
+    <Card onClick={() => {selectedDishHandler(dish.id)}}>
+      <CardImg width="100%" src={dish.image} alt={dish.name} />
+      <CardImgOverlay>
+        <CardTitle>{dish.name}</CardTitle>
+      </CardImgOverlay>
+    </Card>
+  );
+}
 
-  render() {
-    const  props = this.props
-    // call parent component's method in the handler
-    const menu = props.dishes.map(dish => (
-      <div key={dish.id} className="col-12 col-md-5 m-1">
-        <Card onClick={() => {props.selectedDishHandler(dish.id)}}>
-          <CardImg width="100%" src={dish.image} alt={dish.name} />
-          <CardImgOverlay>
-            <CardTitle>{dish.name}</CardTitle>
-          </CardImgOverlay>
-        </Card>
-      </div>
-    ));
+// Menu component
+function Menu(props){
+  const menu = props.dishes.map(dish => (
+    <div key={dish.id} className="col-12 col-md-5 m-1">
+      <MenuItem dish={dish}  selectedDishHandler={props.selectedDishHandler} />
+    </div>
+  ));
 
-    return (<div className="container"><div className="row">{menu}</div></div>);
-  }
+  return (<div className="container"><div className="row">{menu}</div></div>);
+
 }
 
 export default Menu;

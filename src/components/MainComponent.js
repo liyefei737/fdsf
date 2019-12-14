@@ -31,13 +31,12 @@ class Main extends Component {
             this.onDishSelect(selectedDishID);
           }}
         />
-          <div className="row">
-            <Dishdetail
-              dish={this.state.dishes
-                .filter(d => d.id === this.state.selectedDishID)
-                .pop()}
-            />
-          </div>
+
+        <Dishdetail
+          dish={this.state.dishes
+            .filter(d => d.id === this.state.selectedDishID)
+            .pop()}
+        />
       </div>
     );
   }
