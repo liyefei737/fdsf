@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Media } from "reactstrap";
+import Dishdetail from './DishdetailComponent'
+
 import {
   Card,
   CardImg,
@@ -21,7 +22,6 @@ class Menu extends Component {
 
   handleItemClick(dish) {
     this.setState({ selectedDish: dish }, function() {
-      console.log(this.state);
     });
   }
 
@@ -55,9 +55,7 @@ class Menu extends Component {
       <div className="container">
         <div className="row">{menu}</div>
         <div className="row">
-          <div className="col-12 m-3">
-            {this.renderDish(this.state.selectedDish)}
-          </div>
+          <Dishdetail dish={this.state.selectedDish} />
         </div>
       </div>
     );
