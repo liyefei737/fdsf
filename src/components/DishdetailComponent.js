@@ -17,10 +17,10 @@ class Dishdetail extends Component {
   renderComments(comments) {
     const commentsList = comments.map(c => (
       <li key={c.id}>
-        <span>{c.comment}</span>
-        <span>
+        <p>{c.comment}</p>
+        <p>
           {c.author} {c.date}
-        </span>
+        </p>
       </li>
     ));
     return commentsList;
