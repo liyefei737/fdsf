@@ -19,7 +19,12 @@ class Dishdetail extends Component {
       <li key={c.id}>
         <p>{c.comment}</p>
         <p>
-          {c.author} {c.date}
+          {c.author}{" "}
+          {new Intl.DateTimeFormat("us-US", {
+            year: "numeric",
+            month: "short",
+            day: "2-digit"
+          }).format(new Date(Date.parse(c.date)))}
         </p>
       </li>
     ));
@@ -33,11 +38,13 @@ class Dishdetail extends Component {
     }
     return (
       <div className="row">
-      <div className="col-12 col-md-5">{this.renderDish(dish)}</div>
-      <div className="col-12 col-md-5">
-        <h4> Comments </h4>
-        <ul className="list-unstyled">{this.renderComments(dish.comments)}</ul>
-      </div>
+        <div className="col-12 col-md-5">{this.renderDish(dish)}</div>
+        <div className="col-12 col-md-5">
+          <h4> Comments </h4>
+          <ul className="list-unstyled">
+            {this.renderComments(dish.comments)}
+          </ul>
+        </div>
       </div>
     );
   }

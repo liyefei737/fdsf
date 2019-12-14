@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import { Navbar, NavbarBrand } from "reactstrap";
 import Menu from "./MenuComponent";
 import Dishdetail from "./DishdetailComponent";
-import Dishes from '../dishes'
+import Dishes from "../dishes";
 
 class Main extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       dishes: Dishes,
       selectedDishID: null
-    }
+    };
   }
 
   onDishSelect(dishID) {
@@ -26,12 +26,20 @@ class Main extends Component {
           </div>
         </Navbar>
         <div className="container">
-
-          <Menu dishes={this.state.dishes} selectedDishHandler={(selectedDishID) => {this.onDishSelect(selectedDishID)}} />
+          <Menu
+            dishes={this.state.dishes}
+            selectedDishHandler={selectedDishID => {
+              this.onDishSelect(selectedDishID);
+            }}
+          />
           <div className="row">
-            <Dishdetail dish={this.state.dishes.filter(d => d.id === this.state.selectedDishID).pop() } />
+            <Dishdetail
+              dish={this.state.dishes
+                .filter(d => d.id === this.state.selectedDishID)
+                .pop()}
+            />
           </div>
-       </div>
+        </div>
       </div>
     );
   }
