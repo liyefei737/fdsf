@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,6 +8,7 @@ import {
   Media
 } from "reactstrap";
 import { Link } from "react-router-dom";
+
 
 function About(props) {
   const RenderLeader = ({ leader }) => {
