@@ -1,4 +1,5 @@
 import React from "react";
+import CommentForm from './CommentFormComponent';
 import {
   Card,
   CardImg,
@@ -68,6 +69,7 @@ function Dishdetail(props) {
           <ul className="list-unstyled">
             <DishComments comments={props.comments} />
           </ul>
+          <CommentForm />
         </div>
       </div>
     </div>
