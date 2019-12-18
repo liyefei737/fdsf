@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import {
   Card,
   CardImg,
@@ -26,12 +26,11 @@ import {
   Col
 } from "reactstrap";
 import { Link } from "react-router-dom";
-
+import { Loading } from "./LoadingComponent";
 import { Control, LocalForm, Errors } from "react-redux-form";
 
 export const minLength = len => val => val && val.length >= len;
 export const maxLength = len => val => !val || val.length <= len;
-
 
 class CommentForm extends Component {
   constructor(props) {
@@ -52,7 +51,12 @@ class CommentForm extends Component {
 
   handleSubmit(values) {
     //alert(values.rating + "  " + values.name + " " + values.message);
-    this.props.addComment(this.props.dishID, values.rating, values.name, values.message);
+    this.props.addComment(
+      this.props.dishID,
+      values.rating,
+      values.name,
+      values.message
+    );
   }
 
   render() {
@@ -140,7 +144,6 @@ class CommentForm extends Component {
   }
 }
 
-
 // DishInfo component
 function DishInfo({ dish }) {
   return (
@@ -173,7 +176,23 @@ function DishComments({ comments }) {
 }
 
 function Dishdetail(props) {
-  if (props.dish === undefined) {
+  if (props.isLoading) {
+    return (
+      <div className="container">
+        <div className="row">
+          <Loading />
+        </div>
+      </div>
+    );
+  } else if (props.errMssg) {
+    return (
+      <div className="container">
+        <div className="row">
+          <h4>{props.errMssg}</h4>
+        </div>
+      </div>
+    );
+  } else if (props.dish === undefined) {
     return <div></div>;
   }
   return (
@@ -199,7 +218,7 @@ function Dishdetail(props) {
           <ul className="list-unstyled">
             <DishComments comments={props.comments} />
           </ul>
-          <CommentForm addComment={props.addComment} dishID={props.dish.id}/>
+          <CommentForm addComment={props.addComment} dishID={props.dish.id} />
         </div>
       </div>
     </div>
