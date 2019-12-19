@@ -42,7 +42,7 @@ class CommentForm extends Component {
 
   handleSubmit(values) {
     //alert(values.rating + "  " + values.name + " " + values.message);
-    this.props.addComment(
+    this.props.postComment(
       this.props.dishID,
       values.rating,
       values.name,
@@ -209,7 +209,7 @@ function Dishdetail(props) {
           <ul className="list-unstyled">
             <DishComments comments={props.comments} />
           </ul>
-          <CommentForm addComment={props.addComment} dishID={props.dish.id} />
+          <CommentForm postComment={props.postComment} dishID={props.dish.id} />
         </div>
       </div>
     </div>
