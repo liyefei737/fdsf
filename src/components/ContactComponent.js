@@ -8,7 +8,7 @@ import {
   Row
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import { Control, Form, Errors, action } from "react-redux-form";
+import { Control, Form, Errors } from "react-redux-form";
 import {maxLength, minLength} from '../Validation';
 
 // validator functions

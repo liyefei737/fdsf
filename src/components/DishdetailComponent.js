@@ -7,20 +7,10 @@ import {
   CardTitle,
   Breadcrumb,
   BreadcrumbItem,
-  Nav,
-  Navbar,
-  NavbarBrand,
-  NavbarToggler,
-  Collapse,
-  NavItem,
-  Jumbotron,
   Button,
   Modal,
   ModalHeader,
   ModalBody,
-  Form,
-  FormGroup,
-  Input,
   Label,
   Row,
   Col
@@ -28,6 +18,7 @@ import {
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
 import { Control, LocalForm, Errors } from "react-redux-form";
+import { baseUrl } from '../shared/config';
 
 export const minLength = len => val => val && val.length >= len;
 export const maxLength = len => val => !val || val.length <= len;
@@ -148,7 +139,7 @@ class CommentForm extends Component {
 function DishInfo({ dish }) {
   return (
     <Card>
-      <CardImg top src={dish.image} alt={dish.name} />
+      <CardImg top src={baseUrl + dish.image} alt={dish.name} />
       <CardBody>
         <CardTitle>{dish.name}</CardTitle>
         <CardText>{dish.description}</CardText>
