@@ -18,6 +18,7 @@ import {
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
 import { Control, LocalForm, Errors } from "react-redux-form";
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 import { baseUrl } from '../shared/config';
 
 export const minLength = len => val => val && val.length >= len;
@@ -41,7 +42,6 @@ class CommentForm extends Component {
   }
 
   handleSubmit(values) {
-    //alert(values.rating + "  " + values.name + " " + values.message);
     this.props.postComment(
       this.props.dishID,
       values.rating,
@@ -138,30 +138,35 @@ class CommentForm extends Component {
 // DishInfo component
 function DishInfo({ dish }) {
   return (
-    <Card>
-      <CardImg top src={baseUrl + dish.image} alt={dish.name} />
-      <CardBody>
-        <CardTitle>{dish.name}</CardTitle>
-        <CardText>{dish.description}</CardText>
-      </CardBody>
-    </Card>
+    <FadeTransform
+        in transformProps={{exitTransform: 'scale(0.5) translateY(-50%)'}}>
+      <Card>
+        <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+        <CardBody>
+          <CardTitle>{dish.name}</CardTitle>
+          <CardText>{dish.description}</CardText>
+        </CardBody>
+      </Card>
+    </FadeTransform>
   );
 }
 
 // DishComments component
 function DishComments({ comments }) {
   const commentsList = comments.map(c => (
-    <li key={c.id}>
-      <p>{c.comment}</p>
-      <p>
-        {c.author}{" "}
-        {new Intl.DateTimeFormat("us-US", {
-          year: "numeric",
-          month: "short",
-          day: "2-digit"
-        }).format(new Date(Date.parse(c.date)))}
-      </p>
-    </li>
+    <Fade in>
+      <li key={c.id}>
+        <p>{c.comment}</p>
+        <p>
+          {c.author}{" "}
+          {new Intl.DateTimeFormat("us-US", {
+            year: "numeric",
+            month: "short",
+            day: "2-digit"
+          }).format(new Date(Date.parse(c.date)))}
+        </p>
+      </li>
+    </Fade>
   ));
   return commentsList;
 }
@@ -207,7 +212,9 @@ function Dishdetail(props) {
         <div className="col-12 col-md-5">
           <h4> Comments </h4>
           <ul className="list-unstyled">
+            <Stagger in>
             <DishComments comments={props.comments} />
+            </Stagger>
           </ul>
           <CommentForm postComment={props.postComment} dishID={props.dish.id} />
         </div>
