@@ -90,7 +90,7 @@ class Main extends Component {
                     postFeedback={this.props.postFeedback} />} />
               <Route
                 path="/aboutus"
-                component={() => <About leaders={this.props.leaders} />}
+                component={() => <About leaders={this.props.leaders.leaders} />}
               />
               <Route
                 exact
