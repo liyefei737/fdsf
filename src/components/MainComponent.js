@@ -10,7 +10,7 @@ import { actions } from 'react-redux-form';
 import Dishdetail from "./DishdetailComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { postComment, fetchDishes, fetchComments, fetchPromos, fetchLeaders } from "../redux/ActionCreators";
+import { postFeedback, postComment, fetchDishes, fetchComments, fetchPromos, fetchLeaders } from "../redux/ActionCreators";
 
 const mapStateToProps = state => {
   return {
@@ -22,6 +22,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
+  postFeedback: (feedback) => dispatch(postFeedback(feedback)),
   postComment: (dishId, rating, author, comment) =>
     dispatch(postComment(dishId, rating, author, comment)),
   fetchDishes: () => dispatch(fetchDishes()),
@@ -85,7 +86,8 @@ class Main extends Component {
             <Switch location={this.props.location}>
               <Route exact path="/" component={HomePage} />
               <Route exact path='/contactus' component={() =>
-                  <Contact resetFeedbackForm={this.props.resetFeedbackForm} />} />
+                  <Contact resetFeedbackForm={this.props.resetFeedbackForm}
+                    postFeedback={this.props.postFeedback} />} />
               <Route
                 path="/aboutus"
                 component={() => <About leaders={this.props.leaders} />}

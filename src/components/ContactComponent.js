@@ -25,8 +25,9 @@ class Contact extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(values) {
-    console.log(values);
+  handleSubmit(feeback_form) {
+    console.log(feeback_form);
+    this.props.postFeedback(feeback_form);
     this.props.resetFeedbackForm();
   }
 
